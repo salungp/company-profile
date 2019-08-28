@@ -13,16 +13,18 @@ class CreateContentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('contents', function (Blueprint $table) {
+        Schema::create('contents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title', 128);
-            $table->longText('description');
-            $table->char('icon');
-            $table->string('image', 256);
-            $table->string('link');
-            $table->integer('kategori');
-            $table->timestampTz('created_at');
-            $table->timestampTz('updated_at');
+            $table->string('title', 256);
+            $table->string('slug');
+            $table->longText('description')->nullable();
+            $table->char('icons')->nullable();
+            $table->string('image')->nullable();
+            $table->string('link')->nullable();
+            $table->integer('status');
+            $table->integer('author');
+            $table->string('category');
+            $table->timestamps();
         });
     }
 

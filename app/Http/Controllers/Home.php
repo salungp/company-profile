@@ -4,34 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Visitor;
+use App\Testimonial;
+use App\Content;
+use App\Pricing;
 
 class Home extends Controller
 {
     public function index()
     {
-    	return view('public.home');
-    }
-
-    public function register(Request $req)
-    {
-    	$validateUser = $req->validate([
-    		'name' => 'required|max:256|min:4',
-    		'email' => 'required|email|max:256',
-    		'password' => 'required|min:8'
-    	]);
-    	$dataUser = [
-    		'name' => $req->input('name'),
-    		'email' => $req->input('email'),
-    		'password' => password_hash($req->input('password'), PASSWORD_DEFAULT)
-    	];
-    	DB::table('users')->insert($dataUser);
-    	return redirect()->route('login')->with('alert-success', 'Registrasi berhasil silahkan log in terlebih dahulu.');
+        $visitor = new Visitor;
+        $visitor->ip = @$_SERVER['REMOTE_ADDR'];
+        $visitor->browser = @$_SERVER['HTTP_USER_AGENT'];
+        $visitor->save();
+        $content = Content::where('category', 'diskon')->first();
+        $testimoni =  Testimonial::orderBy('id', 'desc')->get();
+        $banner = Content::where('category', 'banner')->first();
+        $kontak = Content::where('category', 'footer')->first();
+        $testimonial = Content::where('category', 'testimonial')->first();
+        $section = Content::where('category', 'section')->get();
+        $pricing = Pricing::get();
+    	return view('public.home', ['banner' => $banner, 'testimoni' => $testimoni, 'diskon' => $content, 'testimonial' => $testimonial, 'kontak' => $kontak, 'section' => $section, 'pricing' => $pricing]);
     }
 
     public function login(Request $req)
     {
     	$validateUser = $req->validate([
-    		'email' => 'required|email',
+    		'email'    => 'required|email',
     		'password' => 'required'
     	]);
     	$validateEmail = DB::table('users')->where('email', $req->input('email'))->first();
@@ -41,7 +41,7 @@ class Home extends Controller
     		{
     			$req->session()->put('logged_in', true);
     			$req->session()->put('user_id', $validateEmail->id);
-    			return redirect()->route('home');
+    			return redirect()->route('admin');
     		} else {
     			return redirect()->route('login')->with('alert-danger', 'Maaf password anda salah!');
     		}

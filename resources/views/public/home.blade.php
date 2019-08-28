@@ -1,68 +1,50 @@
 @extends('layouts.app')
 @section('title', 'Deskripsi website')
-@section('banner')
+<section class="banner" style="background: url({{ url('/content_images/'.$banner->image) }}) center center no-repeat;background-size: cover;background-attachment: fixed;">
 	<div class="container">
-		<h1 class="big-text">Buat websitemu hanya dalam hitungan menit.</h1>
-		<p>Di sini selain menyediakan berbagai kebutuhan website, juga memberikan fitur buat website cepat. Ayo hosting dan buat websitemu di sini.</p>
-		<a href="#" class="box-btn">Learn More</a>
+		<div class="content">
+			<h1 class="big-text">{{ $banner->title }}</h1>
+			<p>{{ $banner->description }}</p>
+			<div class="center">
+				<div class="links">
+					<a href="#kategori" class="box-btn">Learn More</a>
+					<a href="#contact" class="box-red">Get Started</a>
+				</div>
+			</div>
+		</div>
 	</div>
-	<img src="{{ url('img/assets/bg_1.svg') }}" class="bg_banner">
-	<svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L80,106.7C160,117,320,139,480,154.7C640,171,800,181,960,154.7C1120,128,1280,64,1360,32L1440,0L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,11111,320L0,320Z"></path></svg>
-@endsection
+</section>
 @section('content')
-	<section class="kategori">
+	<section class="kategori" id="kategori">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-xs-6 col-md-4">
-					<div class="box">
-						<div class="icon-wrapper">
-							<div class="icon">
-								<i class="fas fa-rocket"></i>
+				@foreach ($section as $key)
+					<div class="col-sm-6 col-xs-6 col-md-4">
+						<div class="box-item">
+							<div class="icon-wrapper">
+								<div class="icon">
+									<i class="{{ $key->icons }}"></i>
+								</div>
 							</div>
+							<h3 class="medium-text">{{ $key->title }}</h3>
+							<p>{{ $key->description }}</p>
 						</div>
-						<h3 class="medium-text">Hosting Cepat</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
 					</div>
-				</div>
-				<div class="col-sm-6 col-xs-6 col-md-4">
-					<div class="box">
-						<div class="icon-wrapper">
-							<div class="icon">
-								<i class="fas fa-satellite-dish"></i>
-							</div>
-						</div>
-						<h3 class="medium-text">Sinyal Kuat</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xs-6 col-md-4">
-					<div class="box">
-						<div class="icon-wrapper">
-							<div class="icon">
-								<i class="fas fa-user-secret"></i>
-							</div>
-						</div>
-						<h3>Keamanan yang terjamin</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-					</div>
-				</div>
+				@endforeach
 			</div>
 		</div>
 	</section>
 	<section class="paket">
-		<div class="container" style="display: flex;">
-			<div style="max-width: 55%;padding-right: 15px;">
-				<b style="color: #666">DISKON</b>
-				<h3 class="big-text">Diskon 20% untuk pembelian hosting baru!</h3>
-				<p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-				<a href="{{ url('') }}" class="box-btn">Get started</a>
-			</div>
-			<div class="ilustration">
-				<img src="{{ url('/img/assets/bg_2.svg') }}" alt="bg_2" style="width: 75%;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<b style="color: #666;text-transform: uppercase;">{{ $diskon->category }}</b>
+					<h3 class="big-text">{{ $diskon->title }}</h3>
+					<p class="mb-4">{{ $diskon->description }}</p>
+					<a href="{{ $diskon->link }}" class="box-btn">Get started</a>
+				</div>
+				<div class="col-md-6" style="background: url({{ url('/content_images/'.$diskon->image) }}) center center no-repeat;background-size: cover;">
+				</div>
 			</div>
 		</div>
 	</section>
@@ -70,81 +52,62 @@
 		<div class="container">
 			<h1 class="title" style="font-weight: bold;">Pricing</h1>
 			<div class="row">
-				<div class="col-sm-6 col-xs-6 col-md-4">
-					<div class="box">
-						<h3 class="medium-text">Small</h3>
-						<h1 class="price" style="color: 26de81">
-							<span class="icon-text">$</span>
-							<span class="text">400</span>
-							<span class="date">/YEAR</span>
-						</h1>
-						<ul>
-							<li>Hosting kepatan lebih dari 1mb</li>
-							<li>Kapasitas server yang longgar</li>
-							<li>Backup data ketika perlu</li>
-						</ul>
-						<a href="" class="btnFull" style="background: #ccc">Sign up now</a>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xs-6 col-md-4">
-					<div class="box">
-						<h3 class="medium-text">Pro</h3>
-						<h1 class="price" style="color: #45aaf2">
-							<span class="icon-text">$</span>
-							<span class="text">600</span>
-							<span class="date">/YEAR</span>
-						</h1>
-						<ul>
-							<li>Hosting kepatan lebih dari 1mb</li>
-							<li>Kapasitas server yang longgar</li>
-							<li>Backup data ketika perlu</li>
-						</ul>
-						<a href="" class="btnFull" style="background: #45aaf2">Sign up now</a>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xs-6 col-md-4">
-					<div class="box">
-						<h3 class="medium-text">Special</h3>
-						<h1 class="price" style="color: #fc5c65">
-							<span class="icon-text">$</span>
-							<span class="text">900</span>
-							<span class="date">/YEAR</span>
-						</h1>
-						<ul>
-							<li>Hosting kepatan lebih dari 1mb</li>
-							<li>Kapasitas server yang longgar</li>
-							<li>Backup data ketika perlu</li>
-						</ul>
-						<a href="" class="btnFull" style="background: #fc5c65">Sign up now</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="testimonial">
-		<div class="container">
-			<h1 class="title" style="max-width: 370px;line-height: 40px">Apa yang dikatakan client?</h1>
-			<div class="container">
-			</div>
-			<a class="btn-round" style="left: 0" href="#start"><i class="fas fa-arrow-left"></i></a>
-				<a class="btn-round" style="right: 0" href="#end"><i class="fas fa-arrow-right"></i></a>
-			<div class="group">
-				<div id="start"></div>
-				@for($i = 1; $i < 10; $i++)
-					<div class="item">
+				@foreach ($pricing as $key)
+					<div class="col-sm-6 col-xs-6 col-md-4">
 						<div class="box">
-							<div class="profile-image">
-								<div class="image"></div>
-							</div>
-							<h1 class="medium-text">Salung Prastyo</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+							<h3 class="medium-text">{{ ucfirst($key->type) }}</h3>
+							<h1 class="price" style="color: 26de81">
+								<span class="icon-text">{{ $key->mata_uang }}</span>
+								<span class="text">{{ $key->price }}</span>
+								<span class="date">{{ strtoupper($key->per_time) }}</span>
+							</h1>
+							@php $features = explode(',', $key->features) @endphp
+							<ul>
+								@foreach ($features as $k => $v)
+									<li>{{ $v }}</li>
+								@endforeach
+							</ul>
+							<a href="" class="btnFull" style="background: #ccc">Sign up now</a>
 						</div>
 					</div>
-				@endfor
-				<div id="end"></div>
+				@endforeach
 			</div>
 		</div>
 	</section>
+	@if ( ! empty($testimonial))
+		<section class="testimonial">
+			<div class="container">
+				<h1 class="title" style="max-width: 370px;line-height: 40px">{{ $testimonial->title }}</h1>
+				<div class="container">
+				@php $icons = explode(',', $testimonial->icons) @endphp
+				</div>
+				<a class="btn-round" style="left: 0" href="#start"><i class="{{ $icons[0] }}"></i></a>
+					<a class="btn-round" style="right: 0" href="#end"><i class="{{ $icons[1] }}"></i></a>
+				<div class="group">
+					<div id="start"></div>
+					@foreach($testimoni as $key)
+						<div class="item">
+							<div class="box">
+								<div class="profile-image">
+									<div class="image">
+										<img src="{{ url('/testimonials/'.$key->image) }}" alt="{{ $key->image }}"">
+									</div>
+								</div>
+								<h1 class="medium-text">{{ $key->name }}</h1>
+								<div class="star">
+									@for ($i = 1; $i < $key->rate; $i++)
+										<i class="{{ $icons[2] }}"></i>
+									@endfor
+								</div>
+								<p>{{ $key->message }}</p>
+							</div>
+						</div>
+					@endforeach
+					<div id="end"></div>
+				</div>
+			</div>
+		</section>
+	@endif
 @endsection
 @section('footer')
 @endsection

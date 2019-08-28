@@ -12,8 +12,8 @@
 <div class="auth-wrapper">
 	<div class="container">
 		<div class="auth-box">
-			<div class="left">
-				<img src="{{ url('/img/assets/bg_auth.svg') }}" alt="auth bg" class="auth-image" />
+			<div class="left" style="background: url({{ url('/img/assets/ipad-820272_1280.jpg') }}) center center no-repeat;background-size: cover;">
+				
 			</div>
 			<div class="right">
 				@yield('form')

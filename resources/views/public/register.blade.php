@@ -4,6 +4,11 @@
 	<form action="{{ route('_register') }}" method="POST">
 		{{ csrf_field() }}
 		<h1 class="medium-title" style="text-align: center;">Register</h1>
+		@if (session()->has('alert-success'))
+			<div class="alert alert-success">{{ session()->get('alert-success') }}</div>
+		@elseif(session()->has('alert-danger'))
+			<div class="alert alert-danger">{{ session()->get('alert-danger') }}</div>
+		@endif
 		<div class="dbl-form" style="display: flex;margin: 0 -15px">
 			<div class="form-wrapper">
 				<label for="name">Name</label>

@@ -1,3 +1,4 @@
+@php $user = DB::table('users')->where('id', session()->has('user_id'))->first(); @endphp
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url('/css/fontawesome/css/all.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url('/css/fontawesome/css/fontawesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url('/css/app.css') }}">
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </head>
 <body>
 <div class="admin-wrapper">
@@ -19,11 +21,11 @@
 		<div class="profile">
 			<div class="left">
 				<div class="image-round">
-					<img src="{{ url('/img/users/default.jpg') }}" alt="user image">
+					<img src="{{ url('/users/'.$user->profile_image) }}" alt="user image">
 				</div>
 			</div>
 			<div class="right">
-				<b class="name">Salung Prastyo</b>
+				<b class="name">{{ $user->name }}</b>
 				<p class="small-title">Online</p>
 			</div>
 		</div>
@@ -39,14 +41,22 @@
 					<div class="line"></div>
 				</div>
 			</div>
-			<!-- <div class="userAction">
-				<ul>
-					<li>
-						<i class="far fa-bell"></i>
-					</li>
-					<li>Profile</li>
-				</ul>
-			</div> -->
+			<div class="userAction">
+				<div class="dropdown-header">
+					<button class="btn-clean" id="btnToggle"><i class="far fa-envelope"></i></button>
+					<div class="dropdown-header-item">
+						<a href="" class="nav-link">Your message is not found!</a>
+						<a href="" class="nav-link">Your message is not found!</a>
+						<a href="" class="nav-link">Your message is not found!</a>
+					</div>
+				</div>
+				<div class="vertical-divider"></div>
+				<div class="account">
+					<a href="{{ route('profile.index') }}">{{ substr($user->name, 0, 1) }}</a>
+					<span class="tooltip">{{ $user->name }}</span>
+				</div>
+				<a href="{{ route('logout') }}" style="display: inline-block;line-height: 52px;color: #333;text-decoration: none;padding: 0 12px;">Logout</a>
+			</div>
 		</header>
 		<div class="content">
 			@yield('content')

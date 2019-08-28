@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Tabel contact')
+@section('title', 'Dahsboard')
 @section('nav-link')
 <ul>
 	<li>
@@ -15,7 +15,7 @@
 	</li>
 	<hr class="divider">
 	<li>
-		<a href="{{ route('contact') }}" class="active"><i class="fas fa-id-card"></i> <span>Contact</span></a>
+		<a href="{{ route('contact') }}"><i class="fas fa-id-card"></i> <span>Contact</span></a>
 	</li>
 	<hr class="divider">
 	<li>
@@ -23,7 +23,7 @@
 	</li>
 	<hr class="divider">
 	<li>
-		<a href="{{ route('visitor') }}"><i class="fas fa-cog"></i> <span>Visitor</span></a>
+		<a href="{{ route('visitor') }}" class="active"><i class="fas fa-cog"></i> <span>Visitor</span></a>
 	</li>
 	<hr class="divider">
 	<li>
@@ -38,7 +38,7 @@
 @endsection
 @section('content')
 	<div class="table-header">
-		<b class="medium-title" style="margin-bottom: 10px;display: block;">Contact</b>
+		<b class="medium-title" style="margin-bottom: 10px;display: block;">Visitor</b>
 	</div>
 	@if (session()->has('alert-success'))
 		<div class="alert alert-success">{{ session()->get('alert-success') }}</div>
@@ -50,30 +50,24 @@
 			<tr>
 				<th>No</th>
 				<th></th>
-				<th>Nama</th>
-				<th>Email</th>
-				<th>Subject</th>
-				<th>Pesan</th>
+				<th>Ip Adress</th>
+				<th>Browser</th>
 				<th>Waktu</th>
 			</tr>
 			@php $i = 1 @endphp
-			@foreach ($kontak as $key)
+			@foreach ($visitors as $key)
 				<tr>
 					<td>{{ $i++ }}</td>
 					<td>
 						<div class="dropdown">
 							<button class="btn-clean dropBtn"><i class="fas fa-ellipsis-h"></i></button>
 							<div class="dropdown-item">
-								<a href="{{ url('/kontak/delete/'. $key->id) }}"><i class="fas fa-trash-alt"></i> <span>Delete</span></a>
+								<a href="{{ url('/visitor/delete/'.$key->id) }}"><i class="fas fa-trash-alt"></i> <span>Delete</span></a>
 							</div>
 						</div>
 					</td>
-					<td>{{ $key->name }}</td>
-					<td>{{ $key->email }}</td>
-					<td>{{ $key->subjek }}</td>
-					<td>
-						{{ $key->message }}
-					</td>
+					<td>{{ $key->ip }}</td>
+					<td>{{ $key->browser }}</td>
 					<td>{{ date('D M Y', strtotime($key->created_at)) }}</td>
 				</tr>
 			@endforeach

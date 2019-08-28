@@ -20,6 +20,5 @@
 			<div class="small-title" style="color: #dc3545;">{{ $message }}</div>
 		@enderror
 		<button type="submit" class="auth-btn">Sign In</button>
-		<p>Don't have an account? <a href="{{ route('register') }}" style="text-decoration: none;color: rgba(55, 160, 244, 1);">Sign Up</a></p>
 	</form>
 @endsection

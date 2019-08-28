@@ -30,31 +30,54 @@
 				</div>
 				<ul class="nav-links">
 					<li><a href="{{ route('home') }}" class="nav-link" id="navLink">Home</a></li>
-					<li><a href="#" class="nav-link" id="navLink">Kategori</a></li>
+					<li><a href="#kategori" class="nav-link" id="navLink">Kategori</a></li>
 					<li><a href="#pricing" class="nav-link" id="navLink">Pricing</a></li>
-					<li><a href="{{ route('blog') }}" class="nav-link" id="navLink">Blog</a></li>
-					@if( ! session()->has('logged_in'))
-						<li><a href="{{ route('login') }}" class="nav-link" id="navLink">Log In</a></li>
-						<li><a href="{{ route('register') }}" class="box-btn" id="navLink">Sign Up</a></li>
-					@else
-						<li><a href="{{ route('logout') }}" class="nav-link" id="navLink">Log Out</a></li>
-						<li><a href="{{ route('register') }}" class="box-btn" id="navLink">My Account</a></li>
-					@endif
 				</ul>
 			</div>
 		</nav>
 	</header>
-	<section class="banner">
-		@yield('banner')
-	</section>
 	<section>
 		@yield('content')
 	</section>
 	<footer>
 		<div class="container">
+			<div class="contact" id="contact">
+				<form action="{{ route('kontak.store') }}" method="POST">
+					{{ csrf_field() }}
+					<h1 class="medium-text">{{ $kontak->title }}</h1>
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<input type="text" name="name" placeholder="Your name" class="form-control @error('name') input-error @enderror" required>
+							@error('name')
+								<div class="small-title" style="color: #dc3545;">{{ $message }}</div>
+							@enderror
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<input type="email" name="email" placeholder="Your email" class="form-control @error('email') input-error @enderror" required>
+							@error('email')
+								<div class="small-title" style="color: #dc3545;">{{ $message }}</div>
+							@enderror
+						</div>
+						<div class="col-md-12">
+							<input type="text" name="subjek" class="form-control @error('subjek') input-error @enderror" placeholder="Subject">
+							@error('subjek')
+								<div class="small-title" style="color: #dc3545;">{{ $message }}</div>
+							@enderror
+						</div>
+						<div class="col-md-12">
+							<textarea name="message" placeholder="Message" class="form-control form-control @error('message') input-error @enderror" required>
+							</textarea>
+							@error('message')
+								<div class="small-title" style="color: #dc3545;">{{ $message }}</div>
+							@enderror
+							<button class="btn btn-success">Send</button>
+						</div>
+					</div>
+				</form>
+			</div>
 			<a class="medium-text" href="{{ url('') }}" style="font-weight: 700;color: #fff;line-height: 100px">LOGO</a>
 			<ul class="nav-links">
-				<li><a href="#" class="nav-link" id="navLink">Home</a></li>
+				<li><a href="{{ route('home') }}" class="nav-link" id="navLink">Home</a></li>
 				<li><a href="#" class="nav-link" id="navLink">Kategori</a></li>
 				<li><a href="#pricing" class="nav-link" id="navLink">Pricing</a></li>
 				<li><a href="#" class="nav-link" id="navLink">Blog</a></li>

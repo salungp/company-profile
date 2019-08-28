@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Tabel Content')
+@section('title', 'Setting')
 @section('nav-link')
 <ul>
 	<li>
@@ -7,7 +7,7 @@
 	</li>
 	<hr class="divider">
 	<li>
-		<a href="{{ route('content') }}"><i class="fas fa-tachometer-alt"></i> <span>Content</span></a>
+		<a href="{{ route('contents.index') }}"><i class="fas fa-tachometer-alt"></i> <span>Content</span></a>
 	</li>
 	<hr class="divider">
 	<li>
@@ -20,6 +20,18 @@
 	<hr class="divider">
 	<li>
 		<a href="{{ route('setting') }}" class="active"><i class="fas fa-cog"></i> <span>Setting</span></a>
+	</li>
+	<hr class="divider">
+	<li>
+		<a href="{{ route('visitor') }}"><i class="fas fa-cog"></i> <span>Visitor</span></a>
+	</li>
+	<hr class="divider">
+	<li>
+		<a href="{{ route('testimonial.index') }}"><i class="fas fa-cog"></i> <span>Testimonials</span></a>
+	</li>
+	<hr class="divider">
+	<li>
+		<a href="{{ route('pricing') }}"><i class="fas fa-cog"></i> <span>Pricing</span></a>
 	</li>
 	<hr class="divider">
 </ul>
